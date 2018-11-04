@@ -1,22 +1,20 @@
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
 
-import java.nio.ByteBuffer;
-
 /**
  * @author zhangzhidong
  * @create: 2018-11-04 20:23
  */
 @ChannelHandler.Sharable
-public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuffer> {
+public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
-    protected void messageReceived(ChannelHandlerContext ctx, ByteBuffer msg) throws Exception {
-        System.out.println(
-                "Client received: " + msg.toString()
-        );
+    @Override
+    protected void messageReceived(ChannelHandlerContext ctx, ByteBuf in) throws Exception {
+        System.out.println("Client received: " + in.toString(CharsetUtil.UTF_8));
     }
 
     @Override
